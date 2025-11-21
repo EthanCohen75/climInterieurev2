@@ -1,0 +1,4 @@
+/* eslint-disable @typescript-eslint/rule-name */
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
