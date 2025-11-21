@@ -1,35 +1,26 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { Header } from './components';
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <Header />
+      <main>
+        {/* Le reste du contenu de la page viendra ici */}
+        <div id="fonctionnement" className="h-screen bg-gray-100 p-8">
+          <h2 className="text-3xl font-bold">Fonctionnement</h2>
+        </div>
+        <div id="avantages" className="h-screen bg-white p-8">
+          <h2 className="text-3xl font-bold">Avantages</h2>
+        </div>
+        <div id="faq" className="h-screen bg-gray-100 p-8">
+          <h2 className="text-3xl font-bold">FAQ</h2>
+        </div>
+        <div id="formulaire" className="h-screen bg-white p-8">
+          <h2 className="text-3xl font-bold">Formulaire de devis</h2>
+        </div>
+      </main>
     </>
   )
 }
 
-export default App
+export default App;
