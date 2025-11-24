@@ -2,10 +2,19 @@ import React from 'react';
 
 const Hero = () => {
   return (
-    <section className="bg-gray-50">
-      <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
+    <section className="relative min-h-screen bg-gray-50 flex items-center justify-center">
+      <div className="absolute inset-0 z-0 md:hidden">
+        <img
+          src="/interior.jpg"
+          alt="Intérieur d'un appartement parisien avec climatisation discrète"
+          className="w-full h-full object-cover"
+        />
+        <div className="absolute inset-0 bg-black opacity-50"></div> {/* Overlay pour la lisibilité */}
+      </div>
+
+      <div className="relative z-10 mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 items-center gap-12 md:grid-cols-2 lg:gap-20">
-          <div className="text-center md:text-left">
+          <div className="text-center md:text-left bg-white/50 p-6 rounded-lg md:bg-transparent md:p-0 md:rounded-none">
             <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl">
               Climatisation réversible 100 % intérieure pour appartements parisiens
             </h1>
