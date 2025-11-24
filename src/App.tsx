@@ -1,4 +1,4 @@
-import { Header, Hero, WhyThisClim, Advantages, FAQ, Footer } from './components';
+import { Header, Hero, WhyThisClim, FAQ, Footer } from './components';
 import QuoteForm from './components/QuoteForm';
 
 function App() {
@@ -9,12 +9,10 @@ function App() {
       <WhyThisClim />
       <main>
         {/* Le reste du contenu de la page viendra ici */}
-        <div id="fonctionnement" className="bg-gray-100 p-8">
-          <h2 className="text-3xl font-bold">Fonctionnement</h2>
-        </div>
-        <div id="avantages">
+        
+        {/* <div id="avantages">
           <Advantages />
-        </div>
+        </div> */}
         <div id="faq" className="bg-gray-100 p-8">
           <FAQ />
         </div>
