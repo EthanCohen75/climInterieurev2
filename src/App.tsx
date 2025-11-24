@@ -1,4 +1,4 @@
-import { Header, Hero, WhyThisClim, Advantages } from './components';
+import { Header, Hero, WhyThisClim, Advantages, FAQ } from './components';
 import QuoteForm from './components/QuoteForm';
 
 function App() {
@@ -15,8 +15,8 @@ function App() {
         <div id="avantages">
           <Advantages />
         </div>
-        <div id="faq" className="h-screen bg-gray-100 p-8">
-          <h2 className="text-3xl font-bold">FAQ</h2>
+        <div id="faq" className="bg-gray-100 p-8">
+          <FAQ />
         </div>
         <div id="formulaire" className="h-screen bg-white p-8">
           <h2 className="text-3xl font-bold">Formulaire de devis</h2>
