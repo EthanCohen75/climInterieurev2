@@ -11,6 +11,9 @@ const QuoteForm: React.FC = () => {
     typeLogement: '',
     message: '',
   });
+  const [showModal, setShowModal] = useState(false);
+  const [modalContent, setModalContent] = useState('');
+  const [isLoading, setIsLoading] = useState(false); // Nouvel état pour le chargement
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -18,19 +21,23 @@ const QuoteForm: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Formulaire soumis (non envoyé) :', formData);
-    // Ici, vous pourriez intégrer la logique d'envoi vers Google Sheets ultérieurement
+    setIsLoading(true); // Début du chargement
+    setShowModal(true); // Afficher la pop-in de chargement
+    setModalContent('Envoi de votre demande en cours...');
+
     try {
-      const response = await fetch('https://script.google.com/macros/s/AKfycbzmsAUw7ywhITLiKB6NxJa7dsMVHIgVYk7647CO_vRYAXRtEpTDdIOskiVHJHYJ05qk/exec', {
+      await fetch('https://script.google.com/macros/s/AKfycbzmsAUw7ywhITLiKB6NxJa7dsMVHIgVYk7647CO_vRYAXRtEpTDdIOskiVHJHYJ05qk/exec', {
         method: 'POST',
-        mode: 'no-cors', // Important pour les requêtes cross-origin vers Google Apps Script
+        mode: 'no-cors',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(formData),
       });
-      console.log('Formulaire soumis avec succès !', response);
-      alert('Votre demande de devis a été envoyée avec succès !');
+
+      // Google Apps Script renvoie un opaque response en mode no-cors, donc on ne peut pas vérifier `response.ok`
+      // On suppose que si pas d'erreur dans le fetch, c'est succès.
+      setModalContent('Votre demande de devis a été envoyée avec succès !');
       setFormData({ // Réinitialiser le formulaire après l'envoi
         nom: '',
         prenom: '',
@@ -43,8 +50,16 @@ const QuoteForm: React.FC = () => {
       });
     } catch (error) {
       console.error('Erreur lors de la soumission du formulaire :', error);
-      alert('Une erreur est survenue lors de l\'envoi de votre demande. Veuillez réessayer.');
+      setModalContent('Une erreur est survenue lors de l\'envoi de votre demande. Veuillez réessayer.');
+    } finally {
+      setIsLoading(false); // Fin du chargement
+      // La pop-in reste ouverte avec le message de succès/erreur, l'utilisateur la fermera manuellement
     }
+  };
+
+  const closeModal = () => {
+    setShowModal(false);
+    setModalContent('');
   };
 
   return (
@@ -177,12 +192,29 @@ const QuoteForm: React.FC = () => {
             <button
               type="submit"
               className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+              disabled={isLoading} // Désactiver le bouton pendant le chargement
             >
-              Envoyer ma demande
+              {isLoading ? 'Envoi en cours...' : 'Envoyer ma demande'}
             </button>
           </div>
         </form>
       </div>
+
+      {showModal && (
+        <div className="fixed inset-0 bg-gray-600 bg-opacity-75 flex items-center justify-center z-50">
+          <div className="bg-white p-6 rounded-lg shadow-lg text-center">
+            <p className="text-lg font-semibold mb-4">{modalContent}</p>
+            {!isLoading && ( // Afficher le bouton de fermeture uniquement si pas en chargement
+              <button
+                onClick={closeModal}
+                className="mt-4 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+              >
+                Fermer
+              </button>
+            )}
+          </div>
+        </div>
+      )}
     </section>
   );
 };
