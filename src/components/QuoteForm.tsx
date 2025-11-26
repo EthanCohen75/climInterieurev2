@@ -16,10 +16,35 @@ const QuoteForm: React.FC = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     console.log('Formulaire soumis (non envoyé) :', formData);
     // Ici, vous pourriez intégrer la logique d'envoi vers Google Sheets ultérieurement
+    try {
+      const response = await fetch('https://script.google.com/macros/s/AKfycbzmsAUw7ywhITLiKB6NxJa7dsMVHIgVYk7647CO_vRYAXRtEpTDdIOskiVHJHYJ05qk/exec', {
+        method: 'POST',
+        mode: 'no-cors', // Important pour les requêtes cross-origin vers Google Apps Script
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+      console.log('Formulaire soumis avec succès !', response);
+      alert('Votre demande de devis a été envoyée avec succès !');
+      setFormData({ // Réinitialiser le formulaire après l'envoi
+        nom: '',
+        prenom: '',
+        email: '',
+        region: '',
+        telephone: '',
+        adresse: '',
+        typeLogement: '',
+        message: '',
+      });
+    } catch (error) {
+      console.error('Erreur lors de la soumission du formulaire :', error);
+      alert('Une erreur est survenue lors de l\'envoi de votre demande. Veuillez réessayer.');
+    }
   };
 
   return (
