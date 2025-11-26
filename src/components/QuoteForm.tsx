@@ -14,15 +14,56 @@ const QuoteForm: React.FC = () => {
   const [showModal, setShowModal] = useState(false);
   const [modalContent, setModalContent] = useState('');
   const [isLoading, setIsLoading] = useState(false); // Nouvel état pour le chargement
+  const [errors, setErrors] = useState<{ [key: string]: string }>({}); // Nouvel état pour les erreurs
+
+  const validateEmail = (email: string): string => {
+    if (!email) return 'L\'email est obligatoire.';
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) return 'Format d\'email invalide.';
+    return '';
+  };
+
+  const validatePhone = (phone: string): string => {
+    if (!phone) return ''; // Le téléphone n'est pas obligatoire
+    const phoneRegex = /^(?:(?:\+|00)33[\s.-]{0,3}(?:\(0\)[\s.-]{0,3})?|0)[1-9](?:[\s.-]?\d{2}){4}$/;
+    if (!phoneRegex.test(phone)) return 'Format de numéro de téléphone invalide.';
+    return '';
+  };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+
+    // Valider le champ modifié en temps réel
+    let error = '';
+    if (name === 'email') {
+      error = validateEmail(value);
+    } else if (name === 'telephone') {
+      error = validatePhone(value);
+    }
+    setErrors(prevErrors => ({ ...prevErrors, [name]: error }));
+  };
+
+  const validateForm = () => {
+    const newErrors: { [key: string]: string } = {};
+    newErrors.email = validateEmail(formData.email);
+    newErrors.telephone = validatePhone(formData.telephone);
+
+    setErrors(newErrors);
+    return !Object.values(newErrors).some(error => error !== '');
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setIsLoading(true); // Début du chargement
-    setShowModal(true); // Afficher la pop-in de chargement
+
+    if (!validateForm()) {
+      setModalContent('Veuillez corriger les erreurs dans le formulaire.');
+      setShowModal(true);
+      return;
+    }
+
+    setIsLoading(true);
+    setShowModal(true);
     setModalContent('Envoi de votre demande en cours...');
 
     try {
@@ -35,10 +76,8 @@ const QuoteForm: React.FC = () => {
         body: JSON.stringify(formData),
       });
 
-      // Google Apps Script renvoie un opaque response en mode no-cors, donc on ne peut pas vérifier `response.ok`
-      // On suppose que si pas d'erreur dans le fetch, c'est succès.
       setModalContent('Votre demande de devis a été envoyée avec succès !');
-      setFormData({ // Réinitialiser le formulaire après l'envoi
+      setFormData({
         nom: '',
         prenom: '',
         email: '',
@@ -48,12 +87,12 @@ const QuoteForm: React.FC = () => {
         typeLogement: '',
         message: '',
       });
+      setErrors({}); // Réinitialiser les erreurs après un envoi réussi
     } catch (error) {
       console.error('Erreur lors de la soumission du formulaire :', error);
       setModalContent('Une erreur est survenue lors de l\'envoi de votre demande. Veuillez réessayer.');
     } finally {
-      setIsLoading(false); // Fin du chargement
-      // La pop-in reste ouverte avec le message de succès/erreur, l'utilisateur la fermera manuellement
+      setIsLoading(false);
     }
   };
 
@@ -104,8 +143,9 @@ const QuoteForm: React.FC = () => {
               value={formData.email}
               onChange={handleChange}
               required
-              className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+              className={`mt-1 block w-full border ${errors.email ? 'border-red-500' : 'border-gray-300'} rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm`}
             />
+            {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email}</p>}
           </div>
 
           <div>
@@ -142,8 +182,9 @@ const QuoteForm: React.FC = () => {
               id="telephone"
               value={formData.telephone}
               onChange={handleChange}
-              className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+              className={`mt-1 block w-full border ${errors.telephone ? 'border-red-500' : 'border-gray-300'} rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm`}
             />
+            {errors.telephone && <p className="text-red-500 text-xs mt-1">{errors.telephone}</p>}
           </div>
 
           <div>
@@ -192,7 +233,7 @@ const QuoteForm: React.FC = () => {
             <button
               type="submit"
               className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
-              disabled={isLoading} // Désactiver le bouton pendant le chargement
+              disabled={isLoading}
             >
               {isLoading ? 'Envoi en cours...' : 'Envoyer ma demande'}
             </button>
@@ -204,7 +245,7 @@ const QuoteForm: React.FC = () => {
         <div className="fixed inset-0 bg-gray-600 bg-opacity-75 flex items-center justify-center z-50">
           <div className="bg-white p-6 rounded-lg shadow-lg text-center">
             <p className="text-lg font-semibold mb-4">{modalContent}</p>
-            {!isLoading && ( // Afficher le bouton de fermeture uniquement si pas en chargement
+            {!isLoading && (
               <button
                 onClick={closeModal}
                 className="mt-4 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
