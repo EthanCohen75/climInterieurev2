@@ -10,9 +10,6 @@ function App() {
       <main>
         {/* Le reste du contenu de la page viendra ici */}
         
-        {/* <div id="avantages">
-          <Advantages />
-        </div> */}
         <div id="faq" className="bg-gray-100 p-8">
           <FAQ />
         </div>
