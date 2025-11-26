@@ -3,6 +3,18 @@ import React, { useState } from 'react';
 const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
+  const handleSmoothScroll = (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
+    event.preventDefault();
+    const targetId = event.currentTarget.getAttribute('href');
+    if (targetId) {
+      const targetElement = document.querySelector(targetId);
+      if (targetElement) {
+        targetElement.scrollIntoView({ behavior: 'smooth' });
+        setIsMenuOpen(false); // Close mobile menu after click
+      }
+    }
+  };
+
   const navLinks = [
     { href: '#fonctionnement', text: 'Fonctionnement' },
     { href: '#avantages', text: 'Avantages' },
@@ -19,15 +31,16 @@ const Header: React.FC = () => {
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center" aria-label="Navigation principale">
           {navLinks.map((link) => (
-            <a key={link.href} href={link.href} className="text-gray-600 hover:text-blue-700 px-4">
+            <a key={link.href} href={link.href} onClick={handleSmoothScroll} className="text-gray-600 hover:text-blue-700 px-4">
               {link.text}
             </a>
           ))}
           <a
             href="#formulaire"
+            onClick={handleSmoothScroll}
             className="bg-blue-600 text-white font-semibold px-5 py-2 rounded-lg hover:bg-blue-700 transition-colors duration-300"
           >
-            Demander un devis gratuit
+            Prenons contact
           </a>
         </nav>
 
@@ -56,15 +69,16 @@ const Header: React.FC = () => {
         <div id="mobile-menu" className="md:hidden px-6 pb-4">
           <nav className="flex flex-col items-center">
             {navLinks.map((link) => (
-              <a key={link.href} href={link.href} className="text-gray-600 hover:text-blue-700 py-2">
+              <a key={link.href} href={link.href} onClick={handleSmoothScroll} className="text-gray-600 hover:text-blue-700 py-2">
                 {link.text}
               </a>
             ))}
             <a
               href="#formulaire"
+              onClick={handleSmoothScroll}
               className="bg-blue-600 text-white font-semibold w-full text-center mt-4 px-5 py-2 rounded-lg hover:bg-blue-700 transition-colors duration-300"
             >
-              Demander un devis gratuit
+              Prenons contact
             </a>
           </nav>
         </div>
