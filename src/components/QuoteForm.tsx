@@ -3,12 +3,8 @@ import React, { useState } from 'react';
 const QuoteForm: React.FC = () => {
   const [formData, setFormData] = useState({
     nom: '',
-    prenom: '',
     email: '',
-    region: '',
-    telephone: '',
-    adresse: '',
-    typeLogement: '',
+    villeInstallation: '',
     message: '',
   });
   const [showModal, setShowModal] = useState(false);
@@ -23,13 +19,6 @@ const QuoteForm: React.FC = () => {
     return '';
   };
 
-  const validatePhone = (phone: string): string => {
-    if (!phone) return ''; // Le téléphone n'est pas obligatoire
-    const phoneRegex = /^(?:(?:\+|00)33[\s.-]{0,3}(?:\(0\)[\s.-]{0,3})?|0)[1-9](?:[\s.-]?\d{2}){4}$/;
-    if (!phoneRegex.test(phone)) return 'Format de numéro de téléphone invalide.';
-    return '';
-  };
-
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
@@ -38,8 +27,6 @@ const QuoteForm: React.FC = () => {
     let error = '';
     if (name === 'email') {
       error = validateEmail(value);
-    } else if (name === 'telephone') {
-      error = validatePhone(value);
     }
     setErrors(prevErrors => ({ ...prevErrors, [name]: error }));
   };
@@ -47,7 +34,6 @@ const QuoteForm: React.FC = () => {
   const validateForm = () => {
     const newErrors: { [key: string]: string } = {};
     newErrors.email = validateEmail(formData.email);
-    newErrors.telephone = validatePhone(formData.telephone);
 
     setErrors(newErrors);
     return !Object.values(newErrors).some(error => error !== '');
@@ -79,12 +65,8 @@ const QuoteForm: React.FC = () => {
       setModalContent('Votre demande de devis a été envoyée avec succès !');
       setFormData({
         nom: '',
-        prenom: '',
         email: '',
-        region: '',
-        telephone: '',
-        adresse: '',
-        typeLogement: '',
+        villeInstallation: '',
         message: '',
       });
       setErrors({}); // Réinitialiser les erreurs après un envoi réussi
@@ -104,29 +86,20 @@ const QuoteForm: React.FC = () => {
   return (
     <section className="py-16 bg-gray-50">
       <div className="max-w-4xl mx-auto p-8 bg-white shadow-lg rounded-lg">
-        <h2 className="text-3xl font-bold text-center text-gray-800 mb-8">Recevoir un devis gratuit sous 48h</h2>
+        <h2 className="text-3xl font-bold text-center text-gray-800 mb-8">Un projet de climatisation ? Échangeons !</h2>
+        <p className="text-lg text-center text-gray-600 mb-2">Nous sommes à votre écoute pour discuter de vos besoins, sans engagement.</p>
+        <p className="text-md text-center text-gray-600 mb-6">Que ce soit pour une rénovation ou l'intégration discrète d'une solution de climatisation, nous avons des options élégantes pour vous.</p>
+        <p className="text-md text-center text-gray-600 mb-6">Remplissez ce bref formulaire et un conseiller dédié vous contactera très vite.</p>
+        <p className="text-sm text-gray-600 mb-4">Les champs marqués d'un astérisque (*) sont obligatoires.</p>
         <form onSubmit={handleSubmit} className="space-y-6">
-          <p className="text-sm text-gray-600 mb-4">Les champs marqués d'un astérisque (*) sont obligatoires.</p>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 gap-6">
             <div>
-              <label htmlFor="nom" className="block text-sm font-medium text-gray-700">Nom <span className="text-red-500">*</span></label>
+              <label htmlFor="nom" className="block text-sm font-medium text-gray-700">Votre nom <span className="text-red-500">*</span></label>
               <input
                 type="text"
                 name="nom"
                 id="nom"
                 value={formData.nom}
-                onChange={handleChange}
-                required
-                className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-              />
-            </div>
-            <div>
-              <label htmlFor="prenom" className="block text-sm font-medium text-gray-700">Prénom <span className="text-red-500">*</span></label>
-              <input
-                type="text"
-                name="prenom"
-                id="prenom"
-                value={formData.prenom}
                 onChange={handleChange}
                 required
                 className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
@@ -149,76 +122,21 @@ const QuoteForm: React.FC = () => {
           </div>
 
           <div>
-            <label htmlFor="region" className="block text-sm font-medium text-gray-700">Région <span className="text-red-500">*</span></label>
-            <select
-              name="region"
-              id="region"
-              value={formData.region}
+            <label htmlFor="villeInstallation" className="block text-sm font-medium text-gray-700">Ville d'installation <span className="text-red-500">*</span></label>
+            <input
+              type="text"
+              name="villeInstallation"
+              id="villeInstallation"
+              value={formData.villeInstallation}
               onChange={handleChange}
               required
               className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-            >
-              <option value="">Sélectionnez une région</option>
-              <option value="ile-de-france">Île-de-France</option>
-              <option value="nouvelle-aquitaine">Nouvelle-Aquitaine</option>
-              <option value="occitanie">Occitanie</option>
-              <option value="provence-alpes-cote-azur">Provence-Alpes-Côte d'Azur</option>
-              <option value="auvergne-rhone-alpes">Auvergne-Rhône-Alpes</option>
-              <option value="bretagne">Bretagne</option>
-              <option value="centre-val-de-loire">Centre-Val de Loire</option>
-              <option value="bourgogne-franche-comte">Bourgogne-Franche-Comté</option>
-              <option value="grand-est">Grand Est</option>
-              <option value="hauts-de-france">Hauts-de-France</option>
-              <option value="normandie">Normandie</option>
-              <option value="pays-de-la-loire">Pays de la Loire</option>
-            </select>
-          </div>
-
-          <div>
-            <label htmlFor="telephone" className="block text-sm font-medium text-gray-700">Téléphone</label>
-            <input
-              type="tel"
-              name="telephone"
-              id="telephone"
-              value={formData.telephone}
-              onChange={handleChange}
-              className={`mt-1 block w-full border ${errors.telephone ? 'border-red-500' : 'border-gray-300'} rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm`}
-            />
-            {errors.telephone && <p className="text-red-500 text-xs mt-1">{errors.telephone}</p>}
-          </div>
-
-          <div>
-            <label htmlFor="adresse" className="block text-sm font-medium text-gray-700">Adresse / Arrondissement</label>
-            <input
-              type="text"
-              name="adresse"
-              id="adresse"
-              value={formData.adresse}
-              onChange={handleChange}
-              className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
             />
           </div>
 
           <div>
-            <label htmlFor="typeLogement" className="block text-sm font-medium text-gray-700">Type de logement</label>
-            <select
-              name="typeLogement"
-              id="typeLogement"
-              value={formData.typeLogement}
-              onChange={handleChange}
-              className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-            >
-              <option value="">Sélectionnez un type</option>
-              <option value="studio">Studio</option>
-              <option value="t1_t2">T1/T2</option>
-              <option value="t3_t4">T3/T4</option>
-              <option value="duplex">Duplex</option>
-              <option value="maison">Maison</option>
-            </select>
-          </div>
-
-          <div>
-            <label htmlFor="message" className="block text-sm font-medium text-gray-700">Message (optionnel)</label>
+            <label htmlFor="message" className="block text-sm font-medium text-gray-700">Votre question</label>
+            <p className="text-xs text-gray-500 mb-2">Aidez-nous à mieux comprendre vos besoins, peut-être en décrivant le type de propriété et ses caractéristiques...</p>
             <textarea
               name="message"
               id="message"
