@@ -1,5 +1,4 @@
-import { Header, Hero, WhyThisClim, FAQ, Footer, HowItWorks } from './components';
-import QuoteForm from './components/QuoteForm';
+import { Header, Hero, WhyThisClim, FAQ, Footer, HowItWorks, Applications, QuoteForm } from './components';
 
 function App() {
   return (
@@ -8,6 +7,7 @@ function App() {
       <Hero />
       <div id="fonctionnement"><HowItWorks /></div>
       <div id="avantages"><WhyThisClim /></div>
+      <div id="applications"><Applications /></div>
       <main>
         {/* Le reste du contenu de la page viendra ici */}
         
