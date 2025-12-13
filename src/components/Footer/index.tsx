@@ -1,20 +1,40 @@
 import React from 'react';
 
 const Footer: React.FC = () => {
+  const scrollToForm = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    const targetElement = document.querySelector('#formulaire');
+    if (targetElement) {
+      targetElement.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
-    <footer className="bg-gray-800 text-white py-10">
-      <div className="container mx-auto px-4 text-center">
-        <div className="mb-6">
-          <h3 className="text-2xl font-bold mb-2">ClimaO</h3>
-          <p className="text-gray-400">Solution de climatisation 100% intérieure</p>
-        </div>
+    <footer className="bg-editorial-charcoal text-editorial-cream py-16 px-6 border-t border-editorial-ink">
+      <div className="max-w-4xl mx-auto text-center">
+        <h3 className="font-display text-3xl lg:text-4xl text-editorial-cream mb-3">
+          Clim'intérieure
+        </h3>
 
-        <div className="flex flex-col md:flex-row justify-center items-center md:space-x-8 mb-6">
-          <a href="#formulaire" className="text-gray-300 hover:text-blue-400 transition-colors duration-200 py-1 md:py-0">Contact</a>
-        </div>
+        <p className="font-body text-lg text-editorial-stone mb-8">
+          Solution de climatisation 100% intérieure
+        </p>
 
-        <div className="text-gray-500 text-sm">
-          &copy; {new Date().getFullYear()} ClimaO. Tous droits réservés.
+        {/* Divider */}
+        <div className="w-24 h-px bg-editorial-copper mx-auto mb-8"></div>
+
+        {/* Contact link */}
+        <a
+          href="#formulaire"
+          onClick={scrollToForm}
+          className="font-sans text-sm text-editorial-stone hover:text-editorial-copper transition-colors duration-300 uppercase tracking-wide"
+        >
+          Contact
+        </a>
+
+        {/* Copyright */}
+        <div className="font-sans text-sm text-editorial-stone tracking-wide mt-8">
+          &copy; {new Date().getFullYear()} Clim'intérieure. Tous droits réservés.
         </div>
       </div>
     </footer>

@@ -10,35 +10,48 @@ const Header: React.FC = () => {
       const targetElement = document.querySelector(targetId);
       if (targetElement) {
         targetElement.scrollIntoView({ behavior: 'smooth' });
-        setIsMenuOpen(false); // Close mobile menu after click
+        setIsMenuOpen(false);
       }
     }
   };
 
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    setIsMenuOpen(false);
+  };
+
   const navLinks = [
-    { href: '#fonctionnement', text: 'Fonctionnement' },
     { href: '#avantages', text: 'Avantages' },
+    { href: '#applications', text: 'Applications' },
     { href: '#faq', text: 'FAQ' },
   ];
 
   return (
-    <header className="bg-white shadow-md sticky top-0 z-50">
-      <div className="container mx-auto px-6 py-4 flex justify-between items-center">
-        <div className="text-xl font-bold text-gray-800">
-          ClimaO
-        </div>
+    <header className="bg-white/95 backdrop-blur-sm sticky top-0 z-50 border-b border-editorial-mist">
+      <div className="container mx-auto px-6 lg:px-12 py-4 flex justify-between items-center">
+        <button
+          onClick={scrollToTop}
+          className="text-2xl font-display font-bold text-editorial-charcoal tracking-tight hover:text-editorial-copper transition-colors duration-300 cursor-pointer"
+        >
+          Clim'intérieure
+        </button>
 
         {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center" aria-label="Navigation principale">
+        <nav className="hidden md:flex items-center gap-8" aria-label="Navigation principale">
           {navLinks.map((link) => (
-            <a key={link.href} href={link.href} onClick={handleSmoothScroll} className="text-gray-600 hover:text-blue-700 px-4">
+            <a
+              key={link.href}
+              href={link.href}
+              onClick={handleSmoothScroll}
+              className="text-editorial-stone hover:text-editorial-charcoal font-sans text-sm tracking-wide transition-colors duration-300 relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-editorial-copper after:transition-all after:duration-300 hover:after:w-full"
+            >
               {link.text}
             </a>
           ))}
           <a
             href="#formulaire"
             onClick={handleSmoothScroll}
-            className="bg-blue-600 text-white font-semibold px-5 py-2 rounded-lg hover:bg-blue-700 transition-colors duration-300"
+            className="btn-editorial"
           >
             Prenons contact
           </a>
@@ -50,7 +63,7 @@ const Header: React.FC = () => {
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             aria-controls="mobile-menu"
             aria-expanded={isMenuOpen}
-            className="text-gray-800 focus:outline-none"
+            className="text-editorial-charcoal focus:outline-none"
             aria-label="Ouvrir le menu de navigation"
           >
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -66,17 +79,22 @@ const Header: React.FC = () => {
 
       {/* Mobile Navigation Menu */}
       {isMenuOpen && (
-        <div id="mobile-menu" className="md:hidden px-6 pb-4">
-          <nav className="flex flex-col items-center">
+        <div id="mobile-menu" className="md:hidden fixed inset-0 top-16 bg-white z-40 px-6 py-8">
+          <nav className="flex flex-col items-center gap-6">
             {navLinks.map((link) => (
-              <a key={link.href} href={link.href} onClick={handleSmoothScroll} className="text-gray-600 hover:text-blue-700 py-2">
+              <a
+                key={link.href}
+                href={link.href}
+                onClick={handleSmoothScroll}
+                className="text-editorial-charcoal hover:text-editorial-copper font-display text-2xl transition-colors duration-300"
+              >
                 {link.text}
               </a>
             ))}
             <a
               href="#formulaire"
               onClick={handleSmoothScroll}
-              className="bg-blue-600 text-white font-semibold w-full text-center mt-4 px-5 py-2 rounded-lg hover:bg-blue-700 transition-colors duration-300"
+              className="btn-editorial w-full text-center mt-4"
             >
               Prenons contact
             </a>

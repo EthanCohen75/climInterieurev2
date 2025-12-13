@@ -9,8 +9,8 @@ const QuoteForm: React.FC = () => {
   });
   const [showModal, setShowModal] = useState(false);
   const [modalContent, setModalContent] = useState('');
-  const [isLoading, setIsLoading] = useState(false); // Nouvel état pour le chargement
-  const [errors, setErrors] = useState<{ [key: string]: string }>({}); // Nouvel état pour les erreurs
+  const [isLoading, setIsLoading] = useState(false);
+  const [errors, setErrors] = useState<{ [key: string]: string }>({});
 
   const validateEmail = (email: string): string => {
     if (!email) return 'L\'email est obligatoire.';
@@ -23,7 +23,6 @@ const QuoteForm: React.FC = () => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
 
-    // Valider le champ modifié en temps réel
     let error = '';
     if (name === 'email') {
       error = validateEmail(value);
@@ -69,7 +68,7 @@ const QuoteForm: React.FC = () => {
         villeInstallation: '',
         message: '',
       });
-      setErrors({}); // Réinitialiser les erreurs après un envoi réussi
+      setErrors({});
     } catch (error) {
       console.error('Erreur lors de la soumission du formulaire :', error);
       setModalContent('Une erreur est survenue lors de l\'envoi de votre demande. Veuillez réessayer.');
@@ -84,31 +83,40 @@ const QuoteForm: React.FC = () => {
   };
 
   return (
-    <section className="py-16 bg-gray-50">
-      <div className="max-w-4xl mx-auto p-8 bg-white shadow-lg rounded-lg">
-        <h2 className="text-3xl font-bold text-center text-gray-800 mb-8">Un projet de climatisation ? Échangeons !</h2>
-        <p className="text-lg text-center text-gray-600 mb-2">Nous sommes à votre écoute pour discuter de vos besoins, sans engagement.</p>
-        <p className="text-md text-center text-gray-600 mb-6">Que ce soit pour une rénovation ou l'intégration discrète d'une solution de climatisation, nous avons des options élégantes pour vous.</p>
-        <p className="text-md text-center text-gray-600 mb-6">Remplissez ce bref formulaire et un conseiller dédié vous contactera très vite.</p>
-        <p className="text-sm text-gray-600 mb-4">Les champs marqués d'un astérisque (*) sont obligatoires.</p>
-        <form onSubmit={handleSubmit} className="space-y-6">
-          <div className="grid grid-cols-1 gap-6">
-            <div>
-              <label htmlFor="nom" className="block text-sm font-medium text-gray-700">Votre nom <span className="text-red-500">*</span></label>
-              <input
-                type="text"
-                name="nom"
-                id="nom"
-                value={formData.nom}
-                onChange={handleChange}
-                required
-                className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-              />
-            </div>
+    <section className="bg-editorial-cream py-24 lg:py-30 px-6 lg:px-12">
+      <div className="max-w-2xl mx-auto bg-white border border-editorial-mist p-10 lg:p-16">
+        <h2 className="font-display text-4xl lg:text-5xl text-editorial-charcoal text-center mb-6">
+          Un projet de climatisation ?
+        </h2>
+        <p className="font-body text-lg text-editorial-stone text-center mb-3">
+          Nous sommes à votre écoute pour discuter de vos besoins, sans engagement.
+        </p>
+        <p className="font-body text-base text-editorial-stone text-center mb-6">
+          Remplissez ce bref formulaire et un conseiller dédié vous contactera très vite.
+        </p>
+
+        <form onSubmit={handleSubmit} className="mt-12 space-y-6">
+          {/* Nom */}
+          <div>
+            <label htmlFor="nom" className="block font-sans text-sm font-medium text-editorial-charcoal uppercase tracking-wide mb-2">
+              Votre nom <span className="text-red-500">*</span>
+            </label>
+            <input
+              type="text"
+              name="nom"
+              id="nom"
+              value={formData.nom}
+              onChange={handleChange}
+              required
+              className="w-full border border-editorial-mist bg-white px-4 py-3 font-sans text-base text-editorial-ink focus:outline-none focus:border-editorial-sage focus:ring-1 focus:ring-editorial-sage transition-colors duration-300"
+            />
           </div>
 
+          {/* Email */}
           <div>
-            <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email <span className="text-red-500">*</span></label>
+            <label htmlFor="email" className="block font-sans text-sm font-medium text-editorial-charcoal uppercase tracking-wide mb-2">
+              Email <span className="text-red-500">*</span>
+            </label>
             <input
               type="email"
               name="email"
@@ -116,13 +124,16 @@ const QuoteForm: React.FC = () => {
               value={formData.email}
               onChange={handleChange}
               required
-              className={`mt-1 block w-full border ${errors.email ? 'border-red-500' : 'border-gray-300'} rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm`}
+              className={`w-full border ${errors.email ? 'border-red-500 focus:border-red-500 focus:ring-red-500' : 'border-editorial-mist focus:border-editorial-sage focus:ring-editorial-sage'} bg-white px-4 py-3 font-sans text-base text-editorial-ink focus:outline-none focus:ring-1 transition-colors duration-300`}
             />
-            {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email}</p>}
+            {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email}</p>}
           </div>
 
+          {/* Ville d'installation */}
           <div>
-            <label htmlFor="villeInstallation" className="block text-sm font-medium text-gray-700">Ville d'installation <span className="text-red-500">*</span></label>
+            <label htmlFor="villeInstallation" className="block font-sans text-sm font-medium text-editorial-charcoal uppercase tracking-wide mb-2">
+              Ville d'installation <span className="text-red-500">*</span>
+            </label>
             <input
               type="text"
               name="villeInstallation"
@@ -130,27 +141,33 @@ const QuoteForm: React.FC = () => {
               value={formData.villeInstallation}
               onChange={handleChange}
               required
-              className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+              className="w-full border border-editorial-mist bg-white px-4 py-3 font-sans text-base text-editorial-ink focus:outline-none focus:border-editorial-sage focus:ring-1 focus:ring-editorial-sage transition-colors duration-300"
             />
           </div>
 
+          {/* Message */}
           <div>
-            <label htmlFor="message" className="block text-sm font-medium text-gray-700">Votre question</label>
-            <p className="text-xs text-gray-500 mb-2">Aidez-nous à mieux comprendre vos besoins, peut-être en décrivant le type de propriété et ses caractéristiques...</p>
+            <label htmlFor="message" className="block font-sans text-sm font-medium text-editorial-charcoal uppercase tracking-wide mb-2">
+              Votre question
+            </label>
+            <p className="text-sm text-editorial-stone mb-2">
+              Aidez-nous à mieux comprendre vos besoins, peut-être en décrivant le type de propriété et ses caractéristiques...
+            </p>
             <textarea
               name="message"
               id="message"
               rows={4}
               value={formData.message}
               onChange={handleChange}
-              className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+              className="w-full border border-editorial-mist bg-white px-4 py-3 font-sans text-base text-editorial-ink focus:outline-none focus:border-editorial-sage focus:ring-1 focus:ring-editorial-sage transition-colors duration-300"
             ></textarea>
           </div>
 
+          {/* Submit button */}
           <div>
             <button
               type="submit"
-              className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+              className="w-full btn-editorial text-center disabled:opacity-50 disabled:cursor-not-allowed"
               disabled={isLoading}
             >
               {isLoading ? 'Envoi en cours...' : 'Envoyer ma demande'}
@@ -159,14 +176,17 @@ const QuoteForm: React.FC = () => {
         </form>
       </div>
 
+      {/* Modal */}
       {showModal && (
-        <div className="fixed inset-0 bg-gray-600 bg-opacity-75 flex items-center justify-center z-50">
-          <div className="bg-white p-6 rounded-lg shadow-lg text-center">
-            <p className="text-lg font-semibold mb-4">{modalContent}</p>
+        <div className="fixed inset-0 bg-editorial-charcoal/80 backdrop-blur-sm flex items-center justify-center z-50">
+          <div className="bg-white p-10 max-w-md mx-4 border border-editorial-mist">
+            <p className="font-body text-lg text-editorial-charcoal mb-6 text-center">
+              {modalContent}
+            </p>
             {!isLoading && (
               <button
                 onClick={closeModal}
-                className="mt-4 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                className="btn-editorial w-full text-center"
               >
                 Fermer
               </button>

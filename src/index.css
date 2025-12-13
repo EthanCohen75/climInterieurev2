@@ -1,4 +1,82 @@
-/* eslint-disable @typescript-eslint/rule-name */
 @import "tailwindcss/base";
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply font-body text-editorial-ink bg-editorial-cream;
+    font-size: 18px;
+    line-height: 1.7;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display text-editorial-charcoal;
+  }
+}
+
+@layer components {
+  /* Grain texture overlay for editorial depth */
+  .editorial-grain::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='3.5' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.015'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  /* Editorial button style */
+  .btn-editorial {
+    @apply inline-block px-8 py-4 bg-editorial-sage text-white font-sans font-medium tracking-wide uppercase text-sm;
+    @apply transition-all duration-400 ease-editorial;
+    @apply hover:bg-editorial-copper hover:shadow-lg hover:-translate-y-0.5;
+  }
+
+  /* Subtle parallax scroll effect */
+  .parallax-subtle {
+    will-change: transform;
+    transition: transform 0.3s ease-out;
+  }
+
+  /* Image overlay for depth */
+  .image-overlay {
+    position: relative;
+  }
+
+  .image-overlay::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.15) 100%);
+    pointer-events: none;
+  }
+}
+
+@layer utilities {
+  /* Fade-in animation utility */
+  .animate-fade-in {
+    animation: fadeIn 0.6s ease-out forwards;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .delay-100 { animation-delay: 0.1s; }
+  .delay-200 { animation-delay: 0.2s; }
+  .delay-300 { animation-delay: 0.3s; }
+  .delay-400 { animation-delay: 0.4s; }
+}
