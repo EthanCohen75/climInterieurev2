@@ -27,7 +27,7 @@ const Applications = () => {
     {
       title: 'Cafés & Hôtels',
       description: 'Dans les cafés, hôtels, restaurants ou spas, l\'ambiance compte. Notre solution garantit une discrétion totale, un silence apaisant et une efficacité énergétique, s\'intégrant sans effort pour que vos clients profitent pleinement de leur expérience, sans aucune nuisance.',
-      image: '/images_cafe_parisien.jpg',
+      image: '/nvimagecafe.jpg',
       alt: 'Climatisation pour Cafés et Hôtels',
       imagePosition: 'left' as const,
     },
