@@ -79,7 +79,7 @@ const Header: React.FC = () => {
 
       {/* Mobile Navigation Menu */}
       {isMenuOpen && (
-        <div id="mobile-menu" className="md:hidden fixed inset-0 top-16 bg-editorial-cream editorial-grain z-40 px-6 py-8 shadow-2xl">
+        <div id="mobile-menu" className="md:hidden fixed inset-0 top-16 bg-editorial-cream/98 backdrop-blur-md editorial-grain z-40 px-6 py-8 shadow-2xl border-t border-editorial-mist">
           <nav className="flex flex-col items-center gap-6">
             {navLinks.map((link) => (
               <a
