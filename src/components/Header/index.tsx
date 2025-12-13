@@ -79,8 +79,8 @@ const Header: React.FC = () => {
 
       {/* Mobile Navigation Menu */}
       {isMenuOpen && (
-        <div id="mobile-menu" className="md:hidden fixed inset-0 top-16 bg-editorial-cream/98 backdrop-blur-md editorial-grain z-40 px-6 py-8 shadow-2xl border-t border-editorial-mist">
-          <nav className="flex flex-col items-center gap-6">
+        <div id="mobile-menu" className="md:hidden fixed inset-0 top-16 bg-editorial-mist/95 backdrop-blur-md editorial-grain z-[60] px-6 py-8 shadow-2xl border-t border-editorial-mist">
+          <nav className="relative z-10 flex flex-col items-center gap-6">
             {navLinks.map((link) => (
               <a
                 key={link.href}
