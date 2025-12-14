@@ -99,7 +99,7 @@ const QuoteForm: React.FC = () => {
           {/* Nom */}
           <div>
             <label htmlFor="nom" className="block font-sans text-sm font-medium text-editorial-charcoal uppercase tracking-wide mb-2">
-              Votre nom <span className="text-red-500">*</span>
+              Nom <span className="text-red-500">*</span>
             </label>
             <input
               type="text"
