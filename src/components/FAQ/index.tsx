@@ -82,6 +82,11 @@ const FAQ: React.FC = () => {
       answer:
         "Oui. Le système permet à la fois le chauffage et la climatisation pour un confort toute l'année.",
     },
+    {
+      question: "Quel est le prix de l'installation ?",
+      answer:
+        "À partir de 9850€ HT. Le coût final dépend de la taille de votre espace, de la configuration choisie et des spécificités de l'installation. Contactez-nous pour obtenir un devis personnalisé adapté à vos besoins.",
+    },
   ];
 
   const highlightKeywords = (text: string) => {
