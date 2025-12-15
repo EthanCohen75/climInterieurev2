@@ -52,7 +52,13 @@ const QuoteForm: React.FC = () => {
     setModalContent('Envoi de votre demande en cours...');
 
     try {
-      await fetch('https://script.google.com/macros/s/AKfycbzmsAUw7ywhITLiKB6NxJa7dsMVHIgVYk7647CO_vRYAXRtEpTDdIOskiVHJHYJ05qk/exec', {
+      const scriptUrl = import.meta.env.VITE_GOOGLE_SCRIPT_URL;
+
+      if (!scriptUrl) {
+        throw new Error('URL du script Google non configurée. Consultez GOOGLE-SHEETS-SETUP.md');
+      }
+
+      await fetch(scriptUrl, {
         method: 'POST',
         mode: 'no-cors',
         headers: {
