@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { trackLead, trackError } from '../utils/analytics';
 
 const QuoteForm: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -68,6 +69,13 @@ const QuoteForm: React.FC = () => {
       });
 
       setModalContent('Votre demande de devis a été envoyée avec succès !');
+
+      // Tracker la conversion dans Google Analytics
+      trackLead('quote_request', {
+        success: true,
+        ville: formData.villeInstallation,
+      });
+
       setFormData({
         nom: '',
         email: '',
@@ -78,6 +86,9 @@ const QuoteForm: React.FC = () => {
     } catch (error) {
       console.error('Erreur lors de la soumission du formulaire :', error);
       setModalContent('Une erreur est survenue lors de l\'envoi de votre demande. Veuillez réessayer.');
+
+      // Tracker l'erreur dans Google Analytics
+      trackError('Form submission failed: ' + (error instanceof Error ? error.message : 'Unknown error'), false);
     } finally {
       setIsLoading(false);
     }
