@@ -74,7 +74,7 @@ const StructuredData: React.FC = () => {
       "@type": "Offer",
       "url": "https://www.clim-interieure.fr",
       "priceCurrency": "EUR",
-      "price": "9850",
+      "price": "5500",
       "priceValidUntil": "2026-12-31",
       "availability": "https://schema.org/InStock",
       "seller": {
@@ -137,10 +137,10 @@ const StructuredData: React.FC = () => {
       },
       {
         "@type": "Question",
-        "name": "Quel est le prix ?",
+        "name": "Quel est le budget ?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "À partir de 9 850€ HT pour une installation complète. Le prix varie selon la surface à climatiser, le nombre de pièces et les spécificités de votre logement. Demandez un devis gratuit et personnalisé pour obtenir un tarif précis adapté à votre projet."
+          "text": "Le budget dépend du nombre de pièces à équiper et de leur volume. La solution clé en main est à partir de 5 500€ TTC pour une pièce de vie. Pour 5 pièces à équiper, comptez à partir de 15 950€ TTC. Nos équipes vous proposeront la solution adaptée à vos besoins et à votre budget. Des solutions de financement sur 48 mois existent auprès de votre établissement bancaire."
         }
       }
     ]

@@ -48,9 +48,9 @@ const FAQItem: React.FC<FAQItemProps> = ({ question, answer }) => {
         ref={contentRef}
         className="overflow-hidden transition-all duration-500 ease-in-out"
       >
-        <p className="font-body text-lg text-editorial-ink leading-relaxed pt-4">
+        <div className="font-body text-lg text-editorial-ink leading-relaxed pt-4">
           {answer}
-        </p>
+        </div>
       </div>
     </div>
   );
@@ -83,9 +83,37 @@ const FAQ: React.FC = () => {
         "Oui. Le système permet à la fois le chauffage et la climatisation pour un confort toute l'année.",
     },
     {
-      question: "Quel est le prix de l'installation ?",
-      answer:
-        "À partir de 9850€ HT. Le coût final dépend de la taille de votre espace, de la configuration choisie et des spécificités de l'installation. Contactez-nous pour obtenir un devis personnalisé adapté à vos besoins.",
+      question: "Quel est le budget ?",
+      answer: (
+        <div className="space-y-4">
+          <p className="text-editorial-ink">
+            Le budget dépend du nombre de pièces à équiper et de leur volume.
+          </p>
+
+          <div className="bg-editorial-cream/50 border border-editorial-mist rounded-lg p-6 space-y-4">
+            <div className="flex items-baseline gap-3">
+              <span className="text-editorial-stone text-sm">À partir de</span>
+              <span className="font-display text-3xl text-editorial-sage">5 500€ TTC</span>
+              <span className="text-editorial-stone">pour une pièce de vie</span>
+            </div>
+            <div className="flex items-baseline gap-3">
+              <span className="text-editorial-stone text-sm">À partir de</span>
+              <span className="font-display text-3xl text-editorial-sage">15 950€ TTC</span>
+              <span className="text-editorial-stone">pour 5 pièces à équiper</span>
+            </div>
+          </div>
+
+          <p className="text-editorial-ink">
+            Nos équipes vous proposeront la solution adaptée à vos besoins et à votre budget.
+          </p>
+
+          <div className="bg-editorial-sage/10 rounded-lg p-4 mt-4">
+            <p className="text-editorial-charcoal font-medium">
+              💳 Des solutions de financement sur 48 mois existent auprès de votre établissement bancaire.
+            </p>
+          </div>
+        </div>
+      ),
     },
   ];
 
@@ -134,7 +162,7 @@ const FAQ: React.FC = () => {
           <FAQItem
             key={index}
             question={faq.question}
-            answer={highlightKeywords(faq.answer)}
+            answer={typeof faq.answer === 'string' ? highlightKeywords(faq.answer) : faq.answer}
           />
         ))}
       </div>
