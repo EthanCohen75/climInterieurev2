@@ -1,0 +1,9 @@
+# robots.txt pour Clim'intérieure
+# Ce fichier indique aux moteurs de recherche quelles pages indexer
+
+User-agent: *
+Allow: /
+Disallow: /api/
+
+# Sitemap
+Sitemap: https://www.clim-interieure.fr/sitemap.xml

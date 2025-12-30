@@ -1,17 +1,20 @@
-import { Header, Hero, WhyThisClim, FAQ, Footer, Applications, QuoteForm } from './components';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import HomePage from './pages/HomePage';
+import MentionsLegales from './pages/MentionsLegales';
+import PolitiqueConfidentialite from './pages/PolitiqueConfidentialite';
+import ConditionsGenerales from './pages/ConditionsGenerales';
 
 function App() {
   return (
-    <div className="bg-editorial-cream">
-      <Header />
-      <Hero />
-      <div id="avantages"><WhyThisClim /></div>
-      <div id="applications"><Applications /></div>
-      <div id="faq"><FAQ /></div>
-      <div id="formulaire"><QuoteForm /></div>
-      <Footer />
-    </div>
-  )
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/mentions-legales" element={<MentionsLegales />} />
+        <Route path="/politique-confidentialite" element={<PolitiqueConfidentialite />} />
+        <Route path="/conditions-generales" element={<ConditionsGenerales />} />
+      </Routes>
+    </BrowserRouter>
+  );
 }
 
 export default App;

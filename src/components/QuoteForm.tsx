@@ -7,6 +7,7 @@ const QuoteForm: React.FC = () => {
     email: '',
     villeInstallation: '',
     message: '',
+    consentementRGPD: false,
   });
   const [showModal, setShowModal] = useState(false);
   const [modalContent, setModalContent] = useState('');
@@ -21,8 +22,13 @@ const QuoteForm: React.FC = () => {
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+    const { name, value, type } = e.target;
+    const checked = type === 'checkbox' ? (e.target as HTMLInputElement).checked : undefined;
+
+    setFormData({
+      ...formData,
+      [name]: type === 'checkbox' ? checked : value
+    });
 
     let error = '';
     if (name === 'email') {
@@ -34,6 +40,10 @@ const QuoteForm: React.FC = () => {
   const validateForm = () => {
     const newErrors: { [key: string]: string } = {};
     newErrors.email = validateEmail(formData.email);
+
+    if (!formData.consentementRGPD) {
+      newErrors.consentementRGPD = 'Vous devez accepter le traitement de vos données pour continuer.';
+    }
 
     setErrors(newErrors);
     return !Object.values(newErrors).some(error => error !== '');
@@ -81,6 +91,7 @@ const QuoteForm: React.FC = () => {
         email: '',
         villeInstallation: '',
         message: '',
+        consentementRGPD: false,
       });
       setErrors({});
     } catch (error) {
@@ -178,6 +189,35 @@ const QuoteForm: React.FC = () => {
               onChange={handleChange}
               className="w-full border border-editorial-mist bg-white px-4 py-3 font-sans text-base text-editorial-ink focus:outline-none focus:border-editorial-sage focus:ring-1 focus:ring-editorial-sage transition-colors duration-300"
             ></textarea>
+          </div>
+
+          {/* Consentement RGPD */}
+          <div>
+            <label className="flex items-start gap-3 cursor-pointer">
+              <input
+                type="checkbox"
+                name="consentementRGPD"
+                checked={formData.consentementRGPD}
+                onChange={handleChange}
+                className="mt-1 w-5 h-5 border-2 border-editorial-mist rounded focus:ring-2 focus:ring-editorial-sage
+                         text-editorial-sage cursor-pointer flex-shrink-0"
+              />
+              <span className="font-body text-sm text-editorial-stone leading-relaxed">
+                J'accepte que mes données personnelles soient utilisées pour traiter ma demande conformément à la{' '}
+                <a
+                  href="/politique-confidentialite"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-editorial-sage hover:text-editorial-copper underline"
+                >
+                  politique de confidentialité
+                </a>
+                <span className="text-red-500 ml-1">*</span>
+              </span>
+            </label>
+            {errors.consentementRGPD && (
+              <p className="text-red-500 text-sm mt-2">{errors.consentementRGPD}</p>
+            )}
           </div>
 
           {/* Submit button */}
