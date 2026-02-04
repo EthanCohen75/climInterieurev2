@@ -13,7 +13,7 @@ const StructuredData: React.FC = () => {
     "legalName": "YOSSEF AVRAHAM CAPITAL",
     "description": "Solution de climatisation air-eau 100% intérieure pour Paris",
     "url": "https://www.clim-interieure.fr",
-    "logo": "https://www.clim-interieure.fr/logo.png",
+    "logo": "https://www.clim-interieure.fr/logo.jpg",
     "contactPoint": {
       "@type": "ContactPoint",
       "contactType": "Service Client",
@@ -36,7 +36,7 @@ const StructuredData: React.FC = () => {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
     "name": "Clim'intérieure",
-    "image": "https://www.clim-interieure.fr/logo.png",
+    "image": "https://www.clim-interieure.fr/logo.jpg",
     "description": "Climatisation air-eau 100% intérieure sans unité extérieure pour appartements parisiens",
     "@id": "https://www.clim-interieure.fr",
     "url": "https://www.clim-interieure.fr",
@@ -65,6 +65,7 @@ const StructuredData: React.FC = () => {
     "@context": "https://schema.org",
     "@type": "Product",
     "name": "Climatisation Air-Eau Intérieure",
+    "image": "https://www.clim-interieure.fr/interior.jpg",
     "description": "Solution de climatisation 100% intérieure, sans unité extérieure, silencieuse et réversible. Idéale pour appartements parisiens.",
     "brand": {
       "@type": "Brand",
