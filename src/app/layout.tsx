@@ -3,6 +3,9 @@ import './globals.css';
 import AnalyticsInit from '../components/AnalyticsInit';
 
 export const metadata: Metadata = {
+  icons: {
+    icon: '/logo.jpg',
+  },
   title: "Clim'intérieure - Climatisation Air-Eau Discrète pour Paris",
   description: "Climatisation Air-Eau discrète et 100% intérieure pour appartements parisiens. Sans unité extérieure, silencieuse et élégante.",
   keywords: "climatisation paris, climatisation intérieure, air-eau, sans unité extérieure, climatisation appartement parisien, clim discrète, climatisation silencieuse, climatisation réversible",
