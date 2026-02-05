@@ -2,12 +2,10 @@ import { Header, Hero, WhyThisClim, FAQ, Footer, Applications, QuoteForm } from 
 import CookieConsent from '../components/CookieConsent';
 import StructuredData from '../components/SEO/StructuredData';
 
-function HomePage() {
+export default function Home() {
   return (
     <div className="bg-editorial-cream">
-      {/* Données structurées pour le SEO */}
       <StructuredData />
-
       <Header />
       <Hero />
       <div id="avantages"><WhyThisClim /></div>
@@ -15,11 +13,7 @@ function HomePage() {
       <div id="faq"><FAQ /></div>
       <div id="formulaire"><QuoteForm /></div>
       <Footer />
-
-      {/* Bannière de consentement aux cookies */}
       <CookieConsent />
     </div>
   );
 }
-
-export default HomePage;

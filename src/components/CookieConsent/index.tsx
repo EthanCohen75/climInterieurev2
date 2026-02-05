@@ -1,5 +1,7 @@
+'use client';
+
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import {
   hasGivenConsent,
   acceptAllCookies,
@@ -94,7 +96,7 @@ const CookieConsent: React.FC = () => {
                     <p className="font-body text-sm text-editorial-stone">
                       En savoir plus sur notre{' '}
                       <Link
-                        to="/politique-confidentialite"
+                        href="/politique-confidentialite"
                         className="text-editorial-sage hover:text-editorial-copper underline"
                       >
                         Politique de confidentialité

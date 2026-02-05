@@ -1,9 +1,12 @@
+'use client';
+
 import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
 const Footer: React.FC = () => {
-  const location = useLocation();
-  const isHomePage = location.pathname === '/';
+  const pathname = usePathname();
+  const isHomePage = pathname === '/';
 
   const scrollToForm = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
@@ -44,21 +47,21 @@ const Footer: React.FC = () => {
         {/* Liens légaux */}
         <div className="flex flex-wrap justify-center items-center gap-3 text-sm mt-6">
           <Link
-            to="/mentions-legales"
+            href="/mentions-legales"
             className="text-editorial-stone hover:text-editorial-copper transition-colors duration-300"
           >
             Mentions légales
           </Link>
           <span className="text-editorial-stone">•</span>
           <Link
-            to="/politique-confidentialite"
+            href="/politique-confidentialite"
             className="text-editorial-stone hover:text-editorial-copper transition-colors duration-300"
           >
             Politique de confidentialité
           </Link>
           <span className="text-editorial-stone">•</span>
           <Link
-            to="/conditions-generales"
+            href="/conditions-generales"
             className="text-editorial-stone hover:text-editorial-copper transition-colors duration-300"
           >
             Conditions générales

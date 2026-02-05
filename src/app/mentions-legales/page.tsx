@@ -1,14 +1,13 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 
-const MentionsLegales: React.FC = () => {
+export default function MentionsLegales() {
   return (
     <div className="bg-editorial-cream min-h-screen">
       {/* Header simple */}
       <header className="bg-editorial-charcoal text-editorial-cream py-6 px-6">
         <div className="max-w-4xl mx-auto">
-          <Link to="/" className="font-display text-2xl hover:text-editorial-copper transition-colors">
-            ← Clim'intérieure
+          <Link href="/" className="font-display text-2xl hover:text-editorial-copper transition-colors">
+            &larr; Clim&apos;int&eacute;rieure
           </Link>
         </div>
       </header>
@@ -16,7 +15,7 @@ const MentionsLegales: React.FC = () => {
       {/* Contenu */}
       <div className="max-w-4xl mx-auto px-6 py-16">
         <h1 className="font-display text-4xl lg:text-5xl text-editorial-charcoal mb-8">
-          Mentions Légales
+          Mentions L&eacute;gales
         </h1>
 
         <div className="bg-white border border-editorial-mist p-8 lg:p-12 space-y-8">
@@ -24,14 +23,14 @@ const MentionsLegales: React.FC = () => {
           {/* 1. Identification de l'entreprise */}
           <section>
             <h2 className="font-display text-2xl text-editorial-charcoal mb-4 border-b border-editorial-mist pb-2">
-              1. Identification de l'entreprise
+              1. Identification de l&apos;entreprise
             </h2>
             <div className="font-body text-editorial-stone space-y-2">
               <p><strong>Raison sociale :</strong> YOSSEF AVRAHAM CAPITAL</p>
-              <p><strong>Forme juridique :</strong> SASU (Société par Actions Simplifiée Unipersonnelle)</p>
-              <p><strong>Adresse du siège social :</strong> 15 Rue des Belles Feuilles, 75016 Paris</p>
-              <p><strong>Numéro SIRET :</strong> 845 097 443 00012</p>
-              <p><strong>Numéro SIREN :</strong> 845 097 443</p>
+              <p><strong>Forme juridique :</strong> SASU (Soci&eacute;t&eacute; par Actions Simplifi&eacute;e Unipersonnelle)</p>
+              <p><strong>Adresse du si&egrave;ge social :</strong> 15 Rue des Belles Feuilles, 75016 Paris</p>
+              <p><strong>Num&eacute;ro SIRET :</strong> 845 097 443 00012</p>
+              <p><strong>Num&eacute;ro SIREN :</strong> 845 097 443</p>
               <p><strong>Capital social :</strong> 500 euros</p>
               <p><strong>RCS :</strong> Paris</p>
               <p><strong>TVA intracommunautaire :</strong> FR43845097443</p>
@@ -47,18 +46,18 @@ const MentionsLegales: React.FC = () => {
             <div className="font-body text-editorial-stone space-y-2">
               <p><strong>Email :</strong> contact@clim-interieure.fr</p>
               <p><strong>Adresse :</strong> 15 Rue des Belles Feuilles, 75016 Paris</p>
-              <p><strong>Directeur de publication :</strong> M. Charles AZRAN, Président</p>
+              <p><strong>Directeur de publication :</strong> M. Charles AZRAN, Pr&eacute;sident</p>
             </div>
           </section>
 
           {/* 3. Hébergement */}
           <section>
             <h2 className="font-display text-2xl text-editorial-charcoal mb-4 border-b border-editorial-mist pb-2">
-              3. Hébergement du site
+              3. H&eacute;bergement du site
             </h2>
             <div className="font-body text-editorial-stone space-y-2">
-              <p><strong>Hébergeur :</strong> Vercel Inc.</p>
-              <p><strong>Adresse :</strong> 340 S Lemon Ave #4133, Walnut, CA 91789, États-Unis</p>
+              <p><strong>H&eacute;bergeur :</strong> Vercel Inc.</p>
+              <p><strong>Adresse :</strong> 340 S Lemon Ave #4133, Walnut, CA 91789, &Eacute;tats-Unis</p>
               <p><strong>Site web :</strong> <a href="https://vercel.com" target="_blank" rel="noopener noreferrer" className="text-editorial-sage hover:text-editorial-copper underline">vercel.com</a></p>
             </div>
           </section>
@@ -66,16 +65,16 @@ const MentionsLegales: React.FC = () => {
           {/* 4. Propriété intellectuelle */}
           <section>
             <h2 className="font-display text-2xl text-editorial-charcoal mb-4 border-b border-editorial-mist pb-2">
-              4. Propriété intellectuelle
+              4. Propri&eacute;t&eacute; intellectuelle
             </h2>
             <div className="font-body text-editorial-stone space-y-3">
               <p>
-                L'ensemble de ce site relève de la législation française et internationale sur le droit d'auteur
-                et la propriété intellectuelle. Tous les droits de reproduction sont réservés, y compris pour
-                les documents téléchargeables et les représentations iconographiques et photographiques.
+                L&apos;ensemble de ce site rel&egrave;ve de la l&eacute;gislation fran&ccedil;aise et internationale sur le droit d&apos;auteur
+                et la propri&eacute;t&eacute; intellectuelle. Tous les droits de reproduction sont r&eacute;serv&eacute;s, y compris pour
+                les documents t&eacute;l&eacute;chargeables et les repr&eacute;sentations iconographiques et photographiques.
               </p>
               <p>
-                La reproduction de tout ou partie de ce site sur un support électronique quel qu'il soit est
+                La reproduction de tout ou partie de ce site sur un support &eacute;lectronique quel qu&apos;il soit est
                 formellement interdite sauf autorisation expresse du directeur de la publication.
               </p>
             </div>
@@ -84,30 +83,30 @@ const MentionsLegales: React.FC = () => {
           {/* 5. Données personnelles */}
           <section>
             <h2 className="font-display text-2xl text-editorial-charcoal mb-4 border-b border-editorial-mist pb-2">
-              5. Données personnelles
+              5. Donn&eacute;es personnelles
             </h2>
             <div className="font-body text-editorial-stone space-y-3">
               <p>
-                Les informations recueillies sur ce site font l'objet d'un traitement informatique destiné
-                au traitement des demandes de devis et à la gestion de la relation client.
+                Les informations recueillies sur ce site font l&apos;objet d&apos;un traitement informatique destin&eacute;
+                au traitement des demandes de devis et &agrave; la gestion de la relation client.
               </p>
               <p>
-                Conformément à la loi « Informatique et Libertés » du 6 janvier 1978 modifiée et au Règlement
-                Général sur la Protection des Données (RGPD), vous bénéficiez d'un droit d'accès, de rectification,
-                de portabilité et d'effacement de vos données ou encore de limitation du traitement.
+                Conform&eacute;ment &agrave; la loi &laquo; Informatique et Libert&eacute;s &raquo; du 6 janvier 1978 modifi&eacute;e et au R&egrave;glement
+                G&eacute;n&eacute;ral sur la Protection des Donn&eacute;es (RGPD), vous b&eacute;n&eacute;ficiez d&apos;un droit d&apos;acc&egrave;s, de rectification,
+                de portabilit&eacute; et d&apos;effacement de vos donn&eacute;es ou encore de limitation du traitement.
               </p>
               <p>
-                Vous pouvez également, pour des motifs légitimes, vous opposer au traitement des données vous concernant.
+                Vous pouvez &eacute;galement, pour des motifs l&eacute;gitimes, vous opposer au traitement des donn&eacute;es vous concernant.
               </p>
               <p>
-                Pour exercer ces droits ou pour toute question sur le traitement de vos données, vous pouvez consulter
-                notre <Link to="/politique-confidentialite" className="text-editorial-sage hover:text-editorial-copper underline">
-                  Politique de confidentialité
-                </Link> ou nous contacter à l'adresse : contact@clim-interieure.fr
+                Pour exercer ces droits ou pour toute question sur le traitement de vos donn&eacute;es, vous pouvez consulter
+                notre <Link href="/politique-confidentialite" className="text-editorial-sage hover:text-editorial-copper underline">
+                  Politique de confidentialit&eacute;
+                </Link> ou nous contacter &agrave; l&apos;adresse : contact@clim-interieure.fr
               </p>
               <p>
-                Si vous estimez, après nous avoir contactés, que vos droits ne sont pas respectés, vous pouvez
-                adresser une réclamation auprès de la CNIL (Commission Nationale de l'Informatique et des Libertés)
+                Si vous estimez, apr&egrave;s nous avoir contact&eacute;s, que vos droits ne sont pas respect&eacute;s, vous pouvez
+                adresser une r&eacute;clamation aupr&egrave;s de la CNIL (Commission Nationale de l&apos;Informatique et des Libert&eacute;s)
                 sur <a href="https://www.cnil.fr" target="_blank" rel="noopener noreferrer" className="text-editorial-sage hover:text-editorial-copper underline">
                   www.cnil.fr
                 </a>.
@@ -122,12 +121,12 @@ const MentionsLegales: React.FC = () => {
             </h2>
             <div className="font-body text-editorial-stone space-y-3">
               <p>
-                Ce site utilise des cookies, notamment Google Analytics, pour améliorer l'expérience utilisateur
+                Ce site utilise des cookies, notamment Google Analytics, pour am&eacute;liorer l&apos;exp&eacute;rience utilisateur
                 et analyser le trafic du site.
               </p>
               <p>
-                Conformément à la réglementation, votre consentement est demandé avant l'installation de ces cookies.
-                Vous pouvez à tout moment modifier vos préférences via le lien "Gérer les cookies" en bas de page.
+                Conform&eacute;ment &agrave; la r&eacute;glementation, votre consentement est demand&eacute; avant l&apos;installation de ces cookies.
+                Vous pouvez &agrave; tout moment modifier vos pr&eacute;f&eacute;rences via le lien &quot;G&eacute;rer les cookies&quot; en bas de page.
               </p>
             </div>
           </section>
@@ -135,10 +134,10 @@ const MentionsLegales: React.FC = () => {
           {/* Lien retour */}
           <div className="pt-8 border-t border-editorial-mist">
             <Link
-              to="/"
+              href="/"
               className="inline-block btn-editorial"
             >
-              ← Retour à l'accueil
+              &larr; Retour &agrave; l&apos;accueil
             </Link>
           </div>
         </div>
@@ -147,11 +146,9 @@ const MentionsLegales: React.FC = () => {
       {/* Footer minimal */}
       <footer className="bg-editorial-charcoal text-editorial-cream py-8 px-6 text-center">
         <p className="font-sans text-sm">
-          © {new Date().getFullYear()} Clim'intérieure. Tous droits réservés.
+          &copy; {new Date().getFullYear()} Clim&apos;int&eacute;rieure. Tous droits r&eacute;serv&eacute;s.
         </p>
       </footer>
     </div>
   );
-};
-
-export default MentionsLegales;
+}

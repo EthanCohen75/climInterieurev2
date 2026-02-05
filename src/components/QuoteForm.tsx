@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useState } from 'react';
 import { trackLead, trackError } from '../utils/analytics';
 
@@ -63,7 +65,7 @@ const QuoteForm: React.FC = () => {
     setModalContent('Envoi de votre demande en cours...');
 
     try {
-      const scriptUrl = import.meta.env.VITE_GOOGLE_SCRIPT_URL;
+      const scriptUrl = process.env.NEXT_PUBLIC_GOOGLE_SCRIPT_URL;
 
       if (!scriptUrl) {
         throw new Error('URL du script Google non configurée. Consultez GOOGLE-SHEETS-SETUP.md');

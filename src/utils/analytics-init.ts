@@ -10,12 +10,12 @@
  * Charge le script gtag.js et configure le tracking avec l'ID de mesure
  */
 export const initializeGA = (): void => {
-  const measurementId = import.meta.env.VITE_GA_MEASUREMENT_ID;
+  const measurementId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
 
   // Si l'ID de mesure n'est pas configuré, on ne charge pas GA
   if (!measurementId) {
     console.warn(
-      '⚠️ Google Analytics non initialisé: VITE_GA_MEASUREMENT_ID n\'est pas configuré dans .env'
+      '⚠️ Google Analytics non initialisé: NEXT_PUBLIC_GA_MEASUREMENT_ID n\'est pas configuré dans .env'
     );
     return;
   }
